@@ -18,16 +18,50 @@ class PolyTreeNode
         @value
     end 
 
-    def parent=(new_rents_val)
-        if (@parent != new_rents_val) && (@parent != nil)
+    def parent=(new_parents_value)
+        if (@parent != new_parents_value) && (@parent != nil)
             @parent.children.delete(self)
         end
 
-        @parent = new_rents_val
+        @parent = new_parents_value
         
-       if new_rents_val
+       if new_parents_value
         @parent.children.push(self) unless @parent.children.include?(self) 
        end 
     end 
+
+    def add_child(child_node)
+        child_node.parent = self 
+
+        @children.push(child_node) unless @children.include?(child_node)
+    end 
+
+    def remove_child(child_node)
+        child_node.parent = nil 
+
+        @children.include?(child_node) ? @children.delete(child_node) : raise 
+    end 
+
+
+    def dfs(target)
+
+        return self if self.value == target 
+
+        self.children.each do |child| 
+           search_result = child.dfs(target)
+
+           return search_result unless search_result.nil? 
+        end 
+
+        nil
+    end 
+
+    def bfs(target)
+
+
+        
+    end 
+
+
 
 end
