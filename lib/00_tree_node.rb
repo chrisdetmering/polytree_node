@@ -18,9 +18,13 @@ class PolyTreeNode
         @value
     end 
 
-    def parent=(value)
-        @parent = value 
-        parent = PolyTreeNode.new
+    def parent=(parents_value)
+        
+        @parent = parents_value
+        
+       if parents_value
+        @parent.children.push(self) unless @parent.children.include?(self) 
+       end 
     end 
 
 end
