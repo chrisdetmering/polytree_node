@@ -18,11 +18,14 @@ class PolyTreeNode
         @value
     end 
 
-    def parent=(parents_value)
+    def parent=(new_rents_val)
+        if (@parent != new_rents_val) && (@parent != nil)
+            @parent.children.delete(self)
+        end
+
+        @parent = new_rents_val
         
-        @parent = parents_value
-        
-       if parents_value
+       if new_rents_val
         @parent.children.push(self) unless @parent.children.include?(self) 
        end 
     end 
